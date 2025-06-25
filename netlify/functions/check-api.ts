@@ -6,7 +6,7 @@ import decrypt from "../../Helper";
 export async function handler(event, context) {
   try {
     const response = await axios.post(
-      "https://zadmicrofin.brightoncloudtech.com/api/v1/adminRoutes/adminLogin",
+      "https://zadmicrofin.brightoncloudtech.com/api/v1/adminRoutes/admin",
       {
         login: "admin",
         password: "12345678",
