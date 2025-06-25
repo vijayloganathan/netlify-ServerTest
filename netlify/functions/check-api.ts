@@ -47,9 +47,26 @@ export async function handler(event, context) {
 
       await transporter.sendMail({
         from: process.env.MAIL_USER,
-        to: "vijayloganathan2002@gmail.com",
+        to: [
+          "vijay.loganathan@zadroit.com",
+          "gokul.m@zadroit.com",
+          "thirukumara.d@zadroit.com",
+        ],
         subject: "🚨 API DOWN ALERT",
-        text: `API check failed at ${now} IST\n\nError: ${error.message}`,
+        html: `
+    <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fff; max-width: 600px;">
+      <h2 style="color: #d32f2f;">🚨 Server/API Down Alert</h2>
+      <p><strong>Time (IST):</strong> ${now}</p>
+      <p><strong>Issue:</strong> Failed to reach the target API endpoint.</p>
+      <p style="background-color: #fce4ec; padding: 10px; border-left: 4px solid #d32f2f;">
+        <strong>Error Message:</strong><br />
+        ${error.message}
+      </p>
+      <p style="margin-top: 20px;">Please investigate the issue immediately.</p>
+      <hr style="margin: 30px 0;" />
+      <p style="font-size: 12px; color: #888;">This is an automated alert from your monitoring script.</p>
+    </div>
+  `,
       });
     } catch (mailError) {
       console.error("Failed to send email:", mailError.message);
