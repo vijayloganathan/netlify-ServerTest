@@ -1,0 +1,6 @@
+[functions]
+  node_bundler = "esbuild"
+
+[[scheduled.functions]]
+  function = "check-api"
+  cron = "*/10 * * * *"
