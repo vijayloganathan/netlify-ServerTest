@@ -18,7 +18,7 @@ const handler = schedule("*/5 * * * *", async () => {
   });
   try {
     const response = await axios.get(
-      "https://medpredit-commercial.brightoncloudtech.com/api/AdminRoutes/CheckAP"
+      "https://medpredit-commercial.brightoncloudtech.com/api/AdminRoutes/CheckAPI"
     );
 
     const encryptionKey = process.env.ENCRYPTION_KEY;
