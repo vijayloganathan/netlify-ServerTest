@@ -6,13 +6,19 @@ import decrypt from "../../Helper";
 
 // Scheduled every 10 minutes
 const handler = schedule("*/5 * * * *", async () => {
+  const now = new Date().toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
   try {
-    const response = await axios.post(
-      "https://zadmicrofin.brightoncloudtech.com/api/v1/adminRoutes/adminLogin",
-      {
-        login: "admin",
-        password: "12345678",
-      }
+    const response = await axios.get(
+      "https://medpredit-commercial.brightoncloudtech.com/api/AdminRoutes/CheckAP"
     );
 
     const encryptionKey = process.env.ENCRYPTION_KEY;
@@ -21,23 +27,13 @@ const handler = schedule("*/5 * * * *", async () => {
     }
 
     const data = decrypt(response.data[1], response.data[0], encryptionKey);
-
+    console.log("\n\n The Server is Up Now on ", now);
+    console.log("\n Response from the Api", data, "\n");
     return {
       statusCode: 200,
       body: JSON.stringify({ success: true, data }),
     };
   } catch (error) {
-    const now = new Date().toLocaleString("en-IN", {
-      timeZone: "Asia/Kolkata",
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
-
     try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -53,6 +49,7 @@ const handler = schedule("*/5 * * * *", async () => {
           "vijay.loganathan@zadroit.com",
           "gokul.m@zadroit.com",
           "thirukumara.d@zadroit.com",
+          "indumathi.r@zadroit.com",
         ],
         subject: "🚨 API DOWN ALERT",
         html: `
