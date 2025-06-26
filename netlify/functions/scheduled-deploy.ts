@@ -8,7 +8,7 @@ import decrypt from "../../Helper";
 const handler = schedule("*/5 * * * *", async () => {
   try {
     const response = await axios.post(
-      "https://zadmicrofin.brightoncloudtech.com/api/v1/adminRoutes/admin",
+      "https://zadmicrofin.brightoncloudtech.com/api/v1/adminRoutes/adminLogin",
       {
         login: "admin",
         password: "12345678",
